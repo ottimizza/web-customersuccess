@@ -24,6 +24,7 @@ import { NavbarLayoutModule } from './layout/navbar-layout/navbar-layout.module'
 import { DragDropDirective } from '@shared/directives/drag-drop.directive';
 import { DocPipe } from '@shared/pipes/doc.pipe';
 import { PipesModule } from '@shared/pipes/pipes.module';
+import { SuggestionsListModule } from '@modules/suggestions-list/suggestions-list.module';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,9 @@ import { PipesModule } from '@shared/pipes/pipes.module';
     AvatarModule,
     BrandModule,
     BreadcrumbModule,
+
+    //
+    SuggestionsListModule
 
   ],
   providers: [

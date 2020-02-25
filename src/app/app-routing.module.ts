@@ -6,52 +6,69 @@ import { ContentLayoutComponent } from './layout/content-layout/content-layout.c
 
 import { AuthGuard } from '@app/guard/auth.guard';
 import { NoAuthGuard } from '@app/guard/no-auth.guard';
+import { SuggestionsListComponent } from '@modules/suggestions-list/suggestions-list.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'sugestoes',
     pathMatch: 'full'
   },
   {
-    path: 'dashboard',
-    data: {
-      breadcrumb: 'Dashboard'
-    },
+    path: 'sugestoes',
     component: ContentLayoutComponent,
-    canActivate: [NoAuthGuard], // Should be replaced with actual auth guard
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        redirectTo: 'users',
-        pathMatch: 'full'
-      },
-      {
-        path: 'products',
-        data: {
-          breadcrumb: 'Aplicativos'
-        },
-        loadChildren: () => import('@modules/products/products.module').then(m => m.ProductsModule),
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'users',
-        data: {
-          breadcrumb: 'Usuários'
-        },
-        loadChildren: () => import('@modules/users/users.module').then(m => m.UsersModule),
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'organizations',
-        data: {
-          breadcrumb: 'Empresas'
-        },
-        loadChildren: () => import('@modules/organizations/organizations.module').then(m => m.OrganizationModule),
-        canActivate: [AuthGuard]
-      },
+        component: SuggestionsListComponent
+      }
     ]
   },
+  // {
+  //   path: '',
+  //   redirectTo: 'dashboard',
+  //   pathMatch: 'full'
+  // },
+  // {
+  //   path: 'dashboard',
+  //   data: {
+  //     breadcrumb: 'Dashboard'
+  //   },
+  //   component: ContentLayoutComponent,
+  //   canActivate: [NoAuthGuard], // Should be replaced with actual auth guard
+  //   children: [
+  //     {
+  //       path: '',
+  //       redirectTo: 'users',
+  //       pathMatch: 'full'
+  //     },
+  //     {
+  //       path: 'products',
+  //       data: {
+  //         breadcrumb: 'Aplicativos'
+  //       },
+  //       loadChildren: () => import('@modules/products/products.module').then(m => m.ProductsModule),
+  //       canActivate: [AuthGuard]
+  //     },
+  //     {
+  //       path: 'users',
+  //       data: {
+  //         breadcrumb: 'Usuários'
+  //       },
+  //       loadChildren: () => import('@modules/users/users.module').then(m => m.UsersModule),
+  //       canActivate: [AuthGuard]
+  //     },
+  //     {
+  //       path: 'organizations',
+  //       data: {
+  //         breadcrumb: 'Empresas'
+  //       },
+  //       loadChildren: () => import('@modules/organizations/organizations.module').then(m => m.OrganizationModule),
+  //       canActivate: [AuthGuard]
+  //     },
+  //   ]
+  // },
   {
     path: 'auth',
     component: AuthLayoutComponent,

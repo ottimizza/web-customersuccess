@@ -13,7 +13,7 @@ import { SearchOption } from './models/SearchOption';
 export class ComplexSearchInputComponent implements OnInit {
 
   @Input()
-  public debounceTime: number = 300;
+  public debounceTime = 300;
 
   @Input()
   public defaultRule: SearchRule;
@@ -63,15 +63,15 @@ export class ComplexSearchInputComponent implements OnInit {
 
   private applyDefault(value: string): void {
     if (this.defaultRule) {
-      let description = this.format(this.defaultRule.description, value);
-      for (let key in this.defaultRule.value) {
+      const description = this.format(this.defaultRule.description, value);
+      for (const key in this.defaultRule.value) {
         if (Object.prototype.hasOwnProperty.call(this.defaultRule.value, key)) {
           this.defaultRule.value[key] = value;
         }
       }
       this.options.push({
         id: 'default', value: this.defaultRule.value,
-        description: description
+        description
       });
     }
   }
@@ -92,7 +92,7 @@ export class ComplexSearchInputComponent implements OnInit {
   }
 
   private format(text: string, ...args: any[]) {
-    return text.replace(/{(\d+)}/g, function (match, number) {
+    return text.replace(/{(\d+)}/g, (match, number) => {
       return typeof args[number] != 'undefined'
         ? args[number]
         : match
